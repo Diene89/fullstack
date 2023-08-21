@@ -1,0 +1,30 @@
+<div class="form-froup row">
+    <label class="col-sm-10">Documento</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control" [(ngModel)]="name" placeholder="Nome do documento">
+    </div>
+</div>
+<div class="form-froup row" *ngIf="document.id == 0">
+    <label class="col-sm-10">Criado por</label>
+    <div class="col-sm-10">
+        <select [(ngModel)]="selectedUser">
+            <option *ngFor="let user of users" [value]="user.email">{{ user.email }}</option>
+        </select>
+    </div>
+</div>
+<div class="form-froup row" *ngIf="document.id == 0">
+    <label class="col-sm-10">Companhia</label>
+    <div class="col-sm-10">
+        <select [(ngModel)]="selectedCompany">
+            <option *ngFor="let company of companies" [value]="company.name">{{ company.name }}</option>
+        </select>
+    </div>
+</div>
+
+<button (click)="addDocument()" *ngIf="document.id==0" class="btn btn-primary">
+    Adicionar
+</button>
+
+<button (click)="updateDocument()" *ngIf="document.id > 0" class="btn btn-primary">
+    Alterar
+</button>

@@ -1,0 +1,51 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary float-right m-2"
+data-bs-toggle="modal" data-bs-target="#exampleModal"
+(click)="addClick()"
+data-backdrop="static"  data-keyboard="false"
+>Adicionar Usuário</button>
+
+  <div class="modal fade" id="exampleModal" #myModal tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="user">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{ModalTitle}}</h5>
+          <button type="button" class="close"
+          data-bs-dismiss="modal" aria-label="Close"
+          (click)="closeClick()"></button>
+        </div>
+        <div class="modal-body">
+          <app-add-edit-user 
+            [user]="user" 
+            *ngIf="ActivateAddEditUser" 
+            (refreshNeeded)="refreshUserList()">
+          </app-add-edit-user>   
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Empresa</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let dataItem of UserList">
+            <td>{{dataItem.email}}</td>
+            <td>{{dataItem.company.name}}</td>
+            <td>
+                <button type="button" class="btn btn-light mr-1"
+                data-bs-toggle="modal" data-bs-target="#exampleModal"
+                (click)="editClick(dataItem)"
+                data-backdrop="static" data-keyboard="false"
+                >Editar</button>
+            </td>
+            <td>
+                <button type="button" class="btn btn-light mr-1" (click)="delete(dataItem)">Excluir</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
